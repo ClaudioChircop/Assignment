@@ -1,26 +1,18 @@
 import numpy as np
 import pandas as pd
 import seaborn as sns
-import statsmodels.api as sm
 import random
 import shap
 import joblib
 import matplotlib.pyplot as plt
-from sklearn.cluster import AgglomerativeClustering
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
-from sklearn.preprocessing import LabelEncoder
-from sklearn.metrics import confusion_matrix
-from sklearn.metrics import classification_report
+from sklearn.preprocessing import StandardScaler, LabelEncoder
 from mlxtend.plotting import plot_confusion_matrix
 from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import cross_val_score
 from xgboost import XGBClassifier
 from sklearn.model_selection import GridSearchCV
-from sklearn.metrics import make_scorer
-from sklearn.metrics import mean_squared_error
-from sklearn.metrics import r2_score
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, confusion_matrix, classification_report, r2_score, mean_squared_error, make_scorer
 # Function to load the dataset  
 
 file_path = 'micro_world_139countries.csv'
@@ -43,7 +35,7 @@ y= labelencoder_y.fit_transform(y)
 scaler = StandardScaler()
 X = scaler.fit_transform(X)
 
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, random_state = 21)#Creating Test and Training samples, test sample = 20% of the dataset
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.2, _state = 21)#Creating Test and Training samples, test sample = 20% of the dataset
 
 
 #Creating SML Model
@@ -58,7 +50,7 @@ predicted_accounts = labelencoder_y.inverse_transform(model.predict(X_train))
 
 df = pd.DataFrame({'true_accounts': true_accounts, 'predicted_accounts': predicted_accounts})
 
-pd.crosstab(df.true_accounts, df.predicted_accounts)
+pd.tab(df.true_accounts, df.predicted_accounts)
 #print(classification_report(true_accounts,predicted_accounts, labels=labelencoder_y.classes_))
 
 #print(model.score(X_test, y_test))#Final Evaluation
